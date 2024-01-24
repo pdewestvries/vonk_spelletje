@@ -82,8 +82,8 @@ input.onPinPressed(TouchPin.P1, function () {
  * 
  * Een speler start met 5 punten en heeft gewonnen als hij 15 punten heeft.
  */
-let kleur_waarde = 0
 let kleur_spelers: number[] = []
+let kleur_waarde = 0
 let kleur_speler2 = 0
 let kleur_speler3 = 0
 let RandomKleur = 0
@@ -96,19 +96,19 @@ let totaal_speler2: neopixel.Strip = null
 let totaal_speler1: neopixel.Strip = null
 let STRIP: neopixel.Strip = null
 let start_score = 0
-pins.touchSetMode(TouchTarget.P0, TouchTargetMode.Capacitive)
-pins.touchSetMode(TouchTarget.P1, TouchTargetMode.Capacitive)
-pins.touchSetMode(TouchTarget.P2, TouchTargetMode.Capacitive)
-let LENGTE = 70
-start_score = 3
+pins.touchSetMode(TouchTarget.P0, TouchTargetMode.Resistive)
+pins.touchSetMode(TouchTarget.P1, TouchTargetMode.Resistive)
+pins.touchSetMode(TouchTarget.P2, TouchTargetMode.Resistive)
+let LENGTE = 75
+start_score = 5
 STRIP = neopixel.create(DigitalPin.P8, LENGTE, NeoPixelMode.RGB)
-let Speler1 = STRIP.range(0, 3)
-let Speler2 = STRIP.range(3, 3)
-let Speler3 = STRIP.range(6, 3)
-let vonken = STRIP.range(9, 15)
-totaal_speler1 = STRIP.range(24, 15)
-totaal_speler2 = STRIP.range(39, 15)
-totaal_speler3 = STRIP.range(54, 15)
+let Speler1 = STRIP.range(0, 5)
+let Speler2 = STRIP.range(5, 5)
+let Speler3 = STRIP.range(10, 5)
+let vonken = STRIP.range(15, 15)
+totaal_speler1 = STRIP.range(30, 15)
+totaal_speler2 = STRIP.range(45, 15)
+totaal_speler3 = STRIP.range(60, 15)
 let begin = vonken.range(0, 1)
 score_speler1 = start_score
 score_speler2 = start_score
@@ -117,22 +117,6 @@ basic.pause(200)
 STRIP.clear()
 basic.pause(200)
 STRIP.show()
-loops.everyInterval(10000, function () {
-    kleur_spelers = [
-    [neopixel.colors(NeoPixelColors.Red), neopixel.colors(NeoPixelColors.Green), neopixel.colors(NeoPixelColors.Blue)],
-    [neopixel.colors(NeoPixelColors.Red), neopixel.colors(NeoPixelColors.Blue), neopixel.colors(NeoPixelColors.Green)],
-    [neopixel.colors(NeoPixelColors.Blue), neopixel.colors(NeoPixelColors.Red), neopixel.colors(NeoPixelColors.Green)],
-    [neopixel.colors(NeoPixelColors.Blue), neopixel.colors(NeoPixelColors.Green), neopixel.colors(NeoPixelColors.Red)],
-    [neopixel.colors(NeoPixelColors.Green), neopixel.colors(NeoPixelColors.Blue), neopixel.colors(NeoPixelColors.Red)],
-    [neopixel.colors(NeoPixelColors.Green), neopixel.colors(NeoPixelColors.Red), neopixel.colors(NeoPixelColors.Blue)]
-    ]._pickRandom()
-    kleur_speler1 = kleur_spelers[0]
-    kleur_speler2 = kleur_spelers[1]
-    kleur_speler3 = kleur_spelers[2]
-    Speler1.showColor(kleur_speler1)
-    Speler2.showColor(kleur_speler2)
-    Speler3.showColor(kleur_speler3)
-})
 basic.forever(function () {
     begin.showColor(neopixel.colors(NeoPixelColors.Black))
     vonken.shift(1)
@@ -142,7 +126,7 @@ basic.forever(function () {
  * Kies willeurig een kleur en zet deze boven in de rij
  */
 loops.everyInterval(800, function () {
-    kleur_waarde = randint(0, 8)
+    kleur_waarde = randint(0, 4)
     if (kleur_waarde == 0) {
         RandomKleur = neopixel.colors(NeoPixelColors.Red)
     } else {
@@ -157,4 +141,20 @@ loops.everyInterval(800, function () {
         }
     }
     vonken.setPixelColor(1, RandomKleur)
+})
+loops.everyInterval(5000, function () {
+    kleur_spelers = [
+    [neopixel.colors(NeoPixelColors.Red), neopixel.colors(NeoPixelColors.Green), neopixel.colors(NeoPixelColors.Blue)],
+    [neopixel.colors(NeoPixelColors.Red), neopixel.colors(NeoPixelColors.Blue), neopixel.colors(NeoPixelColors.Green)],
+    [neopixel.colors(NeoPixelColors.Blue), neopixel.colors(NeoPixelColors.Red), neopixel.colors(NeoPixelColors.Green)],
+    [neopixel.colors(NeoPixelColors.Blue), neopixel.colors(NeoPixelColors.Green), neopixel.colors(NeoPixelColors.Red)],
+    [neopixel.colors(NeoPixelColors.Green), neopixel.colors(NeoPixelColors.Blue), neopixel.colors(NeoPixelColors.Red)],
+    [neopixel.colors(NeoPixelColors.Green), neopixel.colors(NeoPixelColors.Red), neopixel.colors(NeoPixelColors.Blue)]
+    ]._pickRandom()
+    kleur_speler1 = kleur_spelers[0]
+    kleur_speler2 = kleur_spelers[1]
+    kleur_speler3 = kleur_spelers[2]
+    Speler1.showColor(kleur_speler1)
+    Speler2.showColor(kleur_speler2)
+    Speler3.showColor(kleur_speler3)
 })
