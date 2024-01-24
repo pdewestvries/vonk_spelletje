@@ -17,7 +17,6 @@ input.onPinPressed(TouchPin.P0, function () {
 })
 function verloren () {
     basic.showIcon(IconNames.No)
-    music.play(music.builtinPlayableSoundEffect(soundExpression.sad), music.PlaybackMode.UntilDone)
 }
 input.onButtonPressed(Button.A, function () {
     score_speler1 = start_score
@@ -31,7 +30,6 @@ input.onButtonPressed(Button.A, function () {
 })
 function gewonnen () {
     basic.showIcon(IconNames.Yes)
-    music.play(music.builtinPlayableSoundEffect(soundExpression.twinkle), music.PlaybackMode.UntilDone)
 }
 input.onPinPressed(TouchPin.P2, function () {
     if (score_speler3 > 0) {
@@ -96,9 +94,6 @@ let totaal_speler2: neopixel.Strip = null
 let totaal_speler1: neopixel.Strip = null
 let STRIP: neopixel.Strip = null
 let start_score = 0
-pins.touchSetMode(TouchTarget.P0, TouchTargetMode.Resistive)
-pins.touchSetMode(TouchTarget.P1, TouchTargetMode.Resistive)
-pins.touchSetMode(TouchTarget.P2, TouchTargetMode.Resistive)
 let LENGTE = 75
 start_score = 5
 STRIP = neopixel.create(DigitalPin.P8, LENGTE, NeoPixelMode.RGB)
